@@ -1,0 +1,74 @@
+.homeHero {
+  text-align: center;
+  padding: var(--espacio2xl) 0;
+  margin-bottom: var(--espacio2xl);
+}
+
+.homeEtiqueta {
+  display: inline-block;
+  background-color: rgba(196, 149, 106, 0.2);
+  color: var(--colorAcentoOscuro);
+  padding: 0.35rem 0.85rem;
+  border-radius: 999px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  margin-bottom: var(--espacioMd);
+}
+
+.homeTitulo {
+  max-width: 640px;
+  margin: 0 auto var(--espacioMd);
+}
+
+.homeDescripcion {
+  max-width: 520px;
+  margin: 0 auto var(--espacioXl);
+  font-size: 1.05rem;
+}
+
+.homeAcciones {
+  display: flex;
+  gap: var(--espacioMd);
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.homeTarjetas {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: var(--espacioLg);
+}
+
+.homeTarjeta {
+  background-color: var(--colorSuperficie);
+  border: 1px solid var(--colorBorde);
+  border-radius: var(--radio);
+  padding: var(--espacioLg);
+  box-shadow: var(--sombraSuave);
+  transition: box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+.homeTarjeta:hover {
+  box-shadow: var(--sombraMedia);
+  transform: translateY(-2px);
+}
+
+.homeTarjeta h2 {
+  margin-bottom: var(--espacioSm);
+  font-size: 1.15rem;
+}
+
+.homeTarjeta p {
+  margin-bottom: var(--espacioMd);
+  font-size: 0.95rem;
+}
+
+.homeTarjetaLink {
+  color: var(--colorAcentoOscuro);
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+.homeTarjetaLink:hover {
+  text-decoration: underline;
+}

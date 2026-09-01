@@ -1,0 +1,61 @@
+.navbar {
+  background-color: var(--colorFondoOscuro);
+  color: #fff;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: var(--sombraSuave);
+}
+
+.navbarContenedor {
+  max-width: var(--anchoMaximo);
+  margin: 0 auto;
+  padding: var(--espacioMd) var(--espacioLg);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--espacioMd);
+  flex-wrap: wrap;
+}
+
+.navbarMarca {
+  display: flex;
+  align-items: center;
+  gap: var(--espacioSm);
+  font-weight: 700;
+  font-size: 1.1rem;
+}
+
+.navbarMarcaIcono {
+  font-size: 1.35rem;
+}
+
+.navbarEnlaces {
+  display: flex;
+  gap: var(--espacioSm);
+  flex-wrap: wrap;
+}
+
+.navbarEnlace {
+  padding: 0.5rem 1rem;
+  border-radius: var(--radioPequeno);
+  color: rgba(255, 255, 255, 0.85);
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.navbarEnlace:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  color: #fff;
+}
+
+.navbarEnlaceActivo {
+  background-color: var(--colorAcento);
+  color: #fff;
+}
+
+@media (max-width: 480px) {
+  .navbarContenedor {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}

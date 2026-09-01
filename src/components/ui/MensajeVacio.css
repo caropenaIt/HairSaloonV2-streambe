@@ -1,0 +1,22 @@
+.mensajeVacio {
+  text-align: center;
+  padding: var(--espacio2xl) var(--espacioMd);
+  background-color: var(--colorSuperficie);
+  border: 1px dashed var(--colorBorde);
+  border-radius: var(--radio);
+}
+
+.mensajeVacioIcono {
+  font-size: 2.5rem;
+  display: block;
+  margin-bottom: var(--espacioMd);
+}
+
+.mensajeVacioTitulo {
+  margin-bottom: var(--espacioSm);
+}
+
+.mensajeVacioDescripcion {
+  max-width: 360px;
+  margin: 0 auto;
+}

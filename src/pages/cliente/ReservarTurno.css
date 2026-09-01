@@ -1,0 +1,70 @@
+.reservarTurnoHeader {
+  margin-bottom: var(--espacioXl);
+}
+
+.reservarTurnoVolver {
+  display: inline-block;
+  margin-bottom: var(--espacioMd);
+  color: var(--colorAcentoOscuro);
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.reservarTurnoVolver:hover {
+  text-decoration: underline;
+}
+
+.reservarTurnoPasos {
+  display: flex;
+  gap: var(--espacioSm);
+  margin-bottom: var(--espacioXl);
+  flex-wrap: wrap;
+}
+
+.reservarTurnoPaso {
+  display: flex;
+  align-items: center;
+  gap: var(--espacioSm);
+  padding: var(--espacioSm) var(--espacioMd);
+  border-radius: var(--radioPequeno);
+  background-color: var(--colorSuperficie);
+  border: 1px solid var(--colorBorde);
+  font-size: 0.875rem;
+}
+
+.reservarTurnoPasoActivo {
+  border-color: var(--colorAcento);
+  background-color: rgba(196, 149, 106, 0.1);
+}
+
+.reservarTurnoPasoCompletado {
+  opacity: 0.75;
+}
+
+.reservarTurnoPasoNumero {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background-color: var(--colorBorde);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 0.8rem;
+}
+
+.reservarTurnoPasoActivo .reservarTurnoPasoNumero {
+  background-color: var(--colorAcento);
+  color: #fff;
+}
+
+.reservarTurnoContenido {
+  margin-bottom: var(--espacioXl);
+}
+
+.reservarTurnoNavegacion {
+  display: flex;
+  gap: var(--espacioSm);
+  justify-content: flex-end;
+  flex-wrap: wrap;
+}

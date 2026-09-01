@@ -1,0 +1,72 @@
+.turnoForm {
+  background-color: var(--colorSuperficie);
+  border: 1px solid var(--colorBorde);
+  border-radius: var(--radio);
+  padding: var(--espacioLg);
+  margin-top: var(--espacioMd);
+}
+
+.turnoFormTitulo {
+  margin-bottom: var(--espacioXs);
+}
+
+.turnoFormSubtitulo {
+  margin-bottom: var(--espacioMd);
+  font-size: 0.9rem;
+}
+
+.turnoFormCampo {
+  display: flex;
+  flex-direction: column;
+  gap: var(--espacioXs);
+  margin-bottom: var(--espacioMd);
+}
+
+.turnoFormCampo label,
+.turnoFormEtiqueta {
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+.turnoFormCampo select {
+  padding: 0.65rem 0.85rem;
+  border: 1px solid var(--colorBorde);
+  border-radius: var(--radioPequeno);
+}
+
+.turnoFormHorarios {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--espacioSm);
+}
+
+.turnoFormHorario {
+  padding: 0.5rem 1rem;
+  border: 1px solid var(--colorBorde);
+  border-radius: var(--radioPequeno);
+  background-color: #fff;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.turnoFormHorario:hover {
+  border-color: var(--colorAcento);
+}
+
+.turnoFormHorarioActivo {
+  background-color: var(--colorAcento);
+  border-color: var(--colorAcento);
+  color: #fff;
+}
+
+.turnoFormAviso {
+  color: var(--colorAdvertencia);
+  font-size: 0.9rem;
+}
+
+.turnoFormAcciones {
+  display: flex;
+  gap: var(--espacioSm);
+  justify-content: flex-end;
+  flex-wrap: wrap;
+}

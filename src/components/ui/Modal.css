@@ -1,0 +1,34 @@
+.modalOverlay {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(44, 24, 16, 0.45);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--espacioMd);
+  z-index: 1000;
+}
+
+.modalContenido {
+  background-color: var(--colorSuperficie);
+  border-radius: var(--radio);
+  padding: var(--espacioXl);
+  max-width: 420px;
+  width: 100%;
+  box-shadow: var(--sombraMedia);
+}
+
+.modalTitulo {
+  margin-bottom: var(--espacioSm);
+}
+
+.modalMensaje {
+  margin-bottom: var(--espacioLg);
+}
+
+.modalAcciones {
+  display: flex;
+  gap: var(--espacioSm);
+  justify-content: flex-end;
+  flex-wrap: wrap;
+}

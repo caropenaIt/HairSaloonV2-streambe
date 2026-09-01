@@ -1,0 +1,67 @@
+.adminHomeHeader {
+  margin-bottom: var(--espacioXl);
+}
+
+.adminHomeHeader p {
+  margin-top: var(--espacioSm);
+}
+
+.adminHomeEstadisticas {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: var(--espacioMd);
+  margin-bottom: var(--espacioXl);
+}
+
+.adminHomeStat {
+  background-color: var(--colorSuperficie);
+  border: 1px solid var(--colorBorde);
+  border-radius: var(--radio);
+  padding: var(--espacioLg);
+  text-align: center;
+  box-shadow: var(--sombraSuave);
+}
+
+.adminHomeStatNumero {
+  display: block;
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--colorAcentoOscuro);
+  line-height: 1;
+  margin-bottom: var(--espacioXs);
+}
+
+.adminHomeStatEtiqueta {
+  font-size: 0.85rem;
+  color: var(--colorTextoSuave);
+}
+
+.adminHomeAcciones {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: var(--espacioLg);
+}
+
+.adminHomeTarjeta {
+  background-color: var(--colorSuperficie);
+  border: 1px solid var(--colorBorde);
+  border-radius: var(--radio);
+  padding: var(--espacioXl);
+  box-shadow: var(--sombraSuave);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  display: block;
+}
+
+.adminHomeTarjeta:hover {
+  border-color: var(--colorAcento);
+  box-shadow: var(--sombraMedia);
+}
+
+.adminHomeTarjeta h2 {
+  margin-bottom: var(--espacioSm);
+  font-size: 1.15rem;
+}
+
+.adminHomeTarjeta p {
+  font-size: 0.95rem;
+}

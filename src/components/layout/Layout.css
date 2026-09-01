@@ -1,0 +1,19 @@
+.layout {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.layoutMain {
+  flex: 1;
+  max-width: var(--anchoMaximo);
+  width: 100%;
+  margin: 0 auto;
+  padding: var(--espacioXl) var(--espacioLg);
+}
+
+@media (max-width: 640px) {
+  .layoutMain {
+    padding: var(--espacioLg) var(--espacioMd);
+  }
+}

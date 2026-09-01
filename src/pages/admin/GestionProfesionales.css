@@ -1,0 +1,49 @@
+.gestionProfesionalesHeader {
+  margin-bottom: var(--espacioXl);
+}
+
+.gestionProfesionalesVolver {
+  display: inline-block;
+  margin-bottom: var(--espacioMd);
+  color: var(--colorAcentoOscuro);
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.gestionProfesionalesVolver:hover {
+  text-decoration: underline;
+}
+
+.gestionProfesionalesTituloFila {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--espacioMd);
+  flex-wrap: wrap;
+}
+
+.gestionProfesionalesFeedback {
+  padding: var(--espacioMd);
+  border-radius: var(--radioPequeno);
+  margin-bottom: var(--espacioLg);
+  font-weight: 600;
+}
+
+.gestionProfesionalesFeedback:not(.gestionProfesionalesFeedbackError) {
+  background-color: rgba(45, 106, 79, 0.1);
+  color: var(--colorExito);
+}
+
+.gestionProfesionalesFeedbackError {
+  background-color: rgba(155, 34, 38, 0.1);
+  color: var(--colorError);
+}
+
+.gestionProfesionalesFormularioInline {
+  margin-bottom: var(--espacioXl);
+}
+
+.gestionProfesionalesError {
+  color: var(--colorError);
+  font-weight: 600;
+}

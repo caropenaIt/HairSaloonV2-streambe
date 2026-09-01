@@ -1,0 +1,7 @@
+.selectorProfesionalTitulo {
+  margin-bottom: var(--espacioSm);
+}
+
+.selectorProfesionalDescripcion {
+  margin-bottom: var(--espacioLg);
+}

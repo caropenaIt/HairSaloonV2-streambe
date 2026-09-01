@@ -1,0 +1,30 @@
+.avatarProfesional {
+  border-radius: 50%;
+  object-fit: cover;
+  background-color: var(--colorBorde);
+  flex-shrink: 0;
+}
+
+.avatarProfesionalMediano {
+  width: 72px;
+  height: 72px;
+}
+
+.avatarProfesionalGrande {
+  width: 96px;
+  height: 96px;
+}
+
+.avatarProfesionalFallback {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, var(--colorAcento), var(--colorAcentoOscuro));
+  color: #fff;
+  font-weight: 700;
+  font-size: 1.25rem;
+}
+
+.avatarProfesionalGrande.avatarProfesionalFallback {
+  font-size: 1.5rem;
+}

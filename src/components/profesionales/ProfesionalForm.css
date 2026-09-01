@@ -1,0 +1,108 @@
+.profesionalForm {
+  display: flex;
+  flex-direction: column;
+  gap: var(--espacioMd);
+  background-color: var(--colorSuperficie);
+  border: 1px solid var(--colorBorde);
+  border-radius: var(--radio);
+  padding: var(--espacioLg);
+}
+
+.profesionalFormGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: var(--espacioMd);
+}
+
+.profesionalFormCampo {
+  display: flex;
+  flex-direction: column;
+  gap: var(--espacioXs);
+}
+
+.profesionalFormCampo label,
+.profesionalFormEtiqueta {
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+.profesionalFormCampo input,
+.profesionalFormCampo select,
+.profesionalFormCampo textarea {
+  padding: 0.65rem 0.85rem;
+  border: 1px solid var(--colorBorde);
+  border-radius: var(--radioPequeno);
+  background-color: #fff;
+}
+
+.profesionalFormCampo input:focus,
+.profesionalFormCampo select:focus,
+.profesionalFormCampo textarea:focus {
+  border-color: var(--colorAcento);
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(196, 149, 106, 0.25);
+}
+
+.profesionalFormDias {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--espacioSm);
+}
+
+.profesionalFormDia {
+  display: flex;
+  align-items: center;
+  gap: var(--espacioXs);
+  padding: 0.4rem 0.65rem;
+  border: 1px solid var(--colorBorde);
+  border-radius: var(--radioPequeno);
+  cursor: pointer;
+  font-size: 0.875rem;
+}
+
+.profesionalFormHorariosInput {
+  display: flex;
+  gap: var(--espacioSm);
+}
+
+.profesionalFormHorariosInput input {
+  flex: 1;
+}
+
+.profesionalFormListaHorarios {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--espacioSm);
+  margin-top: var(--espacioSm);
+}
+
+.profesionalFormListaHorarios li {
+  display: flex;
+  align-items: center;
+  gap: var(--espacioXs);
+  background-color: var(--colorFondo);
+  padding: 0.35rem 0.65rem;
+  border-radius: var(--radioPequeno);
+  font-size: 0.875rem;
+}
+
+.profesionalFormListaHorarios button {
+  background: none;
+  border: none;
+  color: var(--colorError);
+  cursor: pointer;
+  font-size: 0.8rem;
+}
+
+.profesionalFormError {
+  color: var(--colorError);
+  font-size: 0.8rem;
+}
+
+.profesionalFormAcciones {
+  display: flex;
+  gap: var(--espacioSm);
+  justify-content: flex-end;
+  flex-wrap: wrap;
+  margin-top: var(--espacioSm);
+}

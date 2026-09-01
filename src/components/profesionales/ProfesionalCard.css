@@ -1,0 +1,59 @@
+.profesionalCard {
+  background-color: var(--colorSuperficie);
+  border: 1px solid var(--colorBorde);
+  border-radius: var(--radio);
+  padding: var(--espacioLg);
+  box-shadow: var(--sombraSuave);
+  display: flex;
+  flex-direction: column;
+  gap: var(--espacioMd);
+  transition: box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.profesionalCard:hover {
+  box-shadow: var(--sombraMedia);
+}
+
+.profesionalCardSeleccionado {
+  border-color: var(--colorAcento);
+  box-shadow: 0 0 0 2px rgba(196, 149, 106, 0.35);
+}
+
+.profesionalCardHeader {
+  display: flex;
+  gap: var(--espacioMd);
+  align-items: center;
+}
+
+.profesionalCardNombre {
+  margin-bottom: var(--espacioXs);
+}
+
+.profesionalCardEspecialidad {
+  display: inline-block;
+  background-color: rgba(196, 149, 106, 0.15);
+  color: var(--colorAcentoOscuro);
+  padding: 0.2rem 0.6rem;
+  border-radius: 999px;
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+.profesionalCardDescripcion {
+  font-size: 0.95rem;
+  flex: 1;
+}
+
+.profesionalCardMeta {
+  display: flex;
+  flex-direction: column;
+  gap: var(--espacioXs);
+  font-size: 0.85rem;
+  color: var(--colorTextoSuave);
+}
+
+.profesionalCardAcciones {
+  display: flex;
+  gap: var(--espacioSm);
+  flex-wrap: wrap;
+}

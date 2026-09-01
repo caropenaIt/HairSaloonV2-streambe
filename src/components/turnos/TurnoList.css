@@ -1,0 +1,32 @@
+.turnoListFiltros {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--espacioMd);
+  margin-bottom: var(--espacioLg);
+}
+
+.turnoListCampo {
+  display: flex;
+  flex-direction: column;
+  gap: var(--espacioXs);
+  min-width: 180px;
+  flex: 1;
+}
+
+.turnoListCampo label {
+  font-weight: 600;
+  font-size: 0.875rem;
+}
+
+.turnoListCampo select {
+  padding: 0.65rem 0.85rem;
+  border: 1px solid var(--colorBorde);
+  border-radius: var(--radioPequeno);
+  background-color: var(--colorSuperficie);
+}
+
+.turnoListGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: var(--espacioLg);
+}

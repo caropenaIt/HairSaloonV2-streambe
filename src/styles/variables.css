@@ -1,0 +1,25 @@
+:root {
+  --colorFondo: #faf7f4;
+  --colorFondoOscuro: #2c1810;
+  --colorSuperficie: #ffffff;
+  --colorTexto: #2c1810;
+  --colorTextoSuave: #6b5b4f;
+  --colorAcento: #c4956a;
+  --colorAcentoOscuro: #a67c52;
+  --colorBorde: #e8ddd4;
+  --colorExito: #2d6a4f;
+  --colorError: #9b2226;
+  --colorAdvertencia: #ca6702;
+  --sombraSuave: 0 2px 8px rgba(44, 24, 16, 0.08);
+  --sombraMedia: 0 4px 16px rgba(44, 24, 16, 0.12);
+  --radio: 12px;
+  --radioPequeno: 8px;
+  --espacioXs: 0.25rem;
+  --espacioSm: 0.5rem;
+  --espacioMd: 1rem;
+  --espacioLg: 1.5rem;
+  --espacioXl: 2rem;
+  --espacio2xl: 3rem;
+  --anchoMaximo: 1200px;
+  --fuentePrincipal: 'Segoe UI', system-ui, -apple-system, sans-serif;
+}

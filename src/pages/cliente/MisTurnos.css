@@ -1,0 +1,77 @@
+.misTurnosHeader {
+  margin-bottom: var(--espacioXl);
+}
+
+.misTurnosVolver {
+  display: inline-block;
+  margin-bottom: var(--espacioMd);
+  color: var(--colorAcentoOscuro);
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.misTurnosVolver:hover {
+  text-decoration: underline;
+}
+
+.misTurnosHeader p {
+  margin-top: var(--espacioSm);
+}
+
+.misTurnosBusqueda {
+  background-color: var(--colorSuperficie);
+  border: 1px solid var(--colorBorde);
+  border-radius: var(--radio);
+  padding: var(--espacioLg);
+  margin-bottom: var(--espacioXl);
+  max-width: 480px;
+}
+
+.misTurnosBusqueda label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: var(--espacioSm);
+}
+
+.misTurnosBusquedaInput {
+  display: flex;
+  gap: var(--espacioSm);
+}
+
+.misTurnosBusquedaInput input {
+  flex: 1;
+  padding: 0.65rem 0.85rem;
+  border: 1px solid var(--colorBorde);
+  border-radius: var(--radioPequeno);
+}
+
+.misTurnosBusquedaInput button {
+  padding: 0.65rem 1.25rem;
+  background-color: var(--colorAcento);
+  color: #fff;
+  border: none;
+  border-radius: var(--radioPequeno);
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.misTurnosBusquedaInput button:hover {
+  background-color: var(--colorAcentoOscuro);
+}
+
+.misTurnosFeedback {
+  padding: var(--espacioMd);
+  border-radius: var(--radioPequeno);
+  margin-bottom: var(--espacioLg);
+  font-weight: 600;
+}
+
+.misTurnosFeedback:not(.misTurnosFeedbackError) {
+  background-color: rgba(45, 106, 79, 0.1);
+  color: var(--colorExito);
+}
+
+.misTurnosFeedbackError {
+  background-color: rgba(155, 34, 38, 0.1);
+  color: var(--colorError);
+}

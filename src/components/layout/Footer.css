@@ -1,0 +1,23 @@
+.footer {
+  background-color: var(--colorFondoOscuro);
+  color: rgba(255, 255, 255, 0.8);
+  margin-top: auto;
+}
+
+.footerContenedor {
+  max-width: var(--anchoMaximo);
+  margin: 0 auto;
+  padding: var(--espacioLg);
+  text-align: center;
+}
+
+.footerTexto {
+  color: #fff;
+  font-weight: 600;
+  margin-bottom: var(--espacioXs);
+}
+
+.footerSubtexto {
+  color: rgba(255, 255, 255, 0.65);
+  font-size: 0.9rem;
+}

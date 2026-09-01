@@ -1,0 +1,75 @@
+.turnoCard {
+  background-color: var(--colorSuperficie);
+  border: 1px solid var(--colorBorde);
+  border-radius: var(--radio);
+  padding: var(--espacioLg);
+  box-shadow: var(--sombraSuave);
+}
+
+.turnoCardHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: var(--espacioSm);
+  margin-bottom: var(--espacioMd);
+}
+
+.turnoCardCliente {
+  font-size: 1.1rem;
+}
+
+.turnoCardEstado {
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  padding: 0.25rem 0.6rem;
+  border-radius: 999px;
+  white-space: nowrap;
+}
+
+.turnoCardEstadoConfirmado {
+  background-color: rgba(45, 106, 79, 0.15);
+  color: var(--colorExito);
+}
+
+.turnoCardEstadoCancelado {
+  background-color: rgba(155, 34, 38, 0.12);
+  color: var(--colorError);
+}
+
+.turnoCardEstadoCompletado {
+  background-color: rgba(202, 103, 2, 0.12);
+  color: var(--colorAdvertencia);
+}
+
+.turnoCardDetalle {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--espacioSm) var(--espacioMd);
+  margin-bottom: var(--espacioMd);
+}
+
+.turnoCardDetalle dt {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--colorTextoSuave);
+  margin-bottom: 0.15rem;
+}
+
+.turnoCardDetalle dd {
+  font-weight: 600;
+  color: var(--colorTexto);
+}
+
+.turnoCardAcciones {
+  display: flex;
+  gap: var(--espacioSm);
+  flex-wrap: wrap;
+}
+
+@media (max-width: 480px) {
+  .turnoCardDetalle {
+    grid-template-columns: 1fr;
+  }
+}

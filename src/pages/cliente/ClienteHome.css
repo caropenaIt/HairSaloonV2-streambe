@@ -1,0 +1,42 @@
+.clienteHomeHeader {
+  margin-bottom: var(--espacioXl);
+}
+
+.clienteHomeHeader p {
+  margin-top: var(--espacioSm);
+}
+
+.clienteHomeAcciones {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: var(--espacioLg);
+}
+
+.clienteHomeTarjeta {
+  background-color: var(--colorSuperficie);
+  border: 1px solid var(--colorBorde);
+  border-radius: var(--radio);
+  padding: var(--espacioXl);
+  box-shadow: var(--sombraSuave);
+  transition: box-shadow 0.2s ease, border-color 0.2s ease;
+  display: block;
+}
+
+.clienteHomeTarjeta:hover {
+  border-color: var(--colorAcento);
+  box-shadow: var(--sombraMedia);
+}
+
+.clienteHomeIcono {
+  font-size: 2rem;
+  display: block;
+  margin-bottom: var(--espacioMd);
+}
+
+.clienteHomeTarjeta h2 {
+  margin-bottom: var(--espacioSm);
+}
+
+.clienteHomeTarjeta p {
+  font-size: 0.95rem;
+}

@@ -1,0 +1,55 @@
+.selectorFechaHoraTitulo {
+  margin-bottom: var(--espacioSm);
+}
+
+.selectorFechaHoraDescripcion {
+  margin-bottom: var(--espacioLg);
+}
+
+.selectorFechaHoraCampo {
+  display: flex;
+  flex-direction: column;
+  gap: var(--espacioSm);
+  margin-bottom: var(--espacioLg);
+}
+
+.selectorFechaHoraCampo label,
+.selectorFechaHoraEtiqueta {
+  font-weight: 600;
+}
+
+.selectorFechaHoraCampo select {
+  padding: 0.65rem 0.85rem;
+  border: 1px solid var(--colorBorde);
+  border-radius: var(--radioPequeno);
+  max-width: 280px;
+}
+
+.selectorFechaHoraHorarios {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--espacioSm);
+}
+
+.selectorFechaHoraBoton {
+  padding: 0.55rem 1.1rem;
+  border: 1px solid var(--colorBorde);
+  border-radius: var(--radioPequeno);
+  background-color: #fff;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.selectorFechaHoraBoton:hover {
+  border-color: var(--colorAcento);
+}
+
+.selectorFechaHoraBotonActivo {
+  background-color: var(--colorAcento);
+  border-color: var(--colorAcento);
+  color: #fff;
+}
+
+.selectorFechaHoraAviso {
+  color: var(--colorAdvertencia);
+}
