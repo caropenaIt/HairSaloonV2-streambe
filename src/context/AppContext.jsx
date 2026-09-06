@@ -1,4 +1,11 @@
-import { createContext, useContext, useMemo, useReducer } from 'react'
+import {
+  createContext,
+  useContext,
+  useEffect,
+  useMemo,
+  useReducer,
+  useRef,
+} from 'react'
 import {
   actualizarProfesional,
   actualizarTurno,
@@ -12,6 +19,7 @@ import {
   obtenerProfesionales,
   obtenerTurnos,
   obtenerTurnosActivosPorProfesional,
+  persistirDatos,
 } from '../services/dataService'
 
 const AppContext = createContext(null)
@@ -50,6 +58,16 @@ function reducer(estado, accion) {
 
 export function AppProvider({ children }) {
   const [estado, dispatch] = useReducer(reducer, null, crearEstadoInicial)
+  const esPrimerRender = useRef(true)
+
+  useEffect(() => {
+    if (esPrimerRender.current) {
+      esPrimerRender.current = false
+      return
+    }
+
+    persistirDatos(estado)
+  }, [estado])
 
   const acciones = useMemo(
     () => ({

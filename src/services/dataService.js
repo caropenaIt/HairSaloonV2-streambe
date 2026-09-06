@@ -1,12 +1,31 @@
 import datosIniciales from '../data/db.json'
 import { generarIdProfesional, generarIdTurno } from '../utils/generarId'
 
+export const CLAVE_PERSISTENCIA = 'unisexHairSaloonDatos'
+
 function clonarDatosIniciales() {
   return JSON.parse(JSON.stringify(datosIniciales))
 }
 
+function leerDatosPersistidos() {
+  try {
+    const datosGuardados = localStorage.getItem(CLAVE_PERSISTENCIA)
+    return datosGuardados ? JSON.parse(datosGuardados) : null
+  } catch {
+    return null
+  }
+}
+
+export function persistirDatos(estado) {
+  try {
+    localStorage.setItem(CLAVE_PERSISTENCIA, JSON.stringify(estado))
+  } catch {
+    // Si localStorage no está disponible, la app sigue funcionando en memoria.
+  }
+}
+
 export function crearEstadoInicial() {
-  return clonarDatosIniciales()
+  return leerDatosPersistidos() ?? clonarDatosIniciales()
 }
 
 export function obtenerProfesionales(estado) {

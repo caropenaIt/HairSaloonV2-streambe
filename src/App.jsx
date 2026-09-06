@@ -18,7 +18,10 @@ function App() {
         <Route path="cliente/mis-turnos" element={<MisTurnos />} />
         <Route path="admin" element={<AdminHome />} />
         <Route path="admin/profesionales" element={<GestionProfesionales />} />
-        <Route path="admin/profesionales/nuevo" element={<GestionProfesionales />} />
+        <Route
+          path="admin/profesionales/nuevo"
+          element={<GestionProfesionales esAltaNueva />}
+        />
         <Route
           path="admin/profesionales/:id/editar"
           element={<GestionProfesionales />}

@@ -8,7 +8,7 @@ import { useProfesionales } from '../../hooks/useProfesionales'
 import { obtenerNombreCompleto } from '../../utils/validaciones'
 import './GestionProfesionales.css'
 
-export function GestionProfesionales() {
+export function GestionProfesionales({ esAltaNueva = false }) {
   const { id } = useParams()
   const navigate = useNavigate()
   const {
@@ -26,8 +26,8 @@ export function GestionProfesionales() {
   const [profesionalEliminando, setProfesionalEliminando] = useState(null)
   const [mensajeFeedback, setMensajeFeedback] = useState('')
 
-  const esModoNuevo = id === 'nuevo'
-  const esModoEditar = id && id !== 'nuevo'
+  const esModoNuevo = esAltaNueva
+  const esModoEditar = !esAltaNueva && Boolean(id)
   const profesionalEditando = esModoEditar
     ? obtenerProfesionalPorId(Number(id))
     : null
