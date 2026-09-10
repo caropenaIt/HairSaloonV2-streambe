@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { validarTurno, obtenerNombreCompleto } from '../../utils/validaciones'
+import { obtenerNombreCompleto } from '../../utils/validaciones'
 import { Boton } from '../ui/Boton'
 import './ConfirmacionTurno.css'
 
@@ -17,13 +17,6 @@ export function ConfirmacionTurno({ profesional, dia, hora, onConfirmar }) {
       especialidad: profesional.especialidad,
     }
 
-    const erroresValidacion = validarTurno(datosTurno)
-    setErrores(erroresValidacion)
-
-    if (Object.keys(erroresValidacion).length > 0) {
-      return
-    }
-
     const resultado = onConfirmar(datosTurno)
 
     if (resultado.exito) {
@@ -31,7 +24,7 @@ export function ConfirmacionTurno({ profesional, dia, hora, onConfirmar }) {
       setClienteNombre('')
       setErrores({})
     } else {
-      setErrores({ general: resultado.mensaje })
+      setErrores(resultado.errores)
     }
   }
 

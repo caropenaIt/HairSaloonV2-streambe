@@ -1,5 +1,6 @@
 import datosIniciales from '../data/db.json'
 import { generarIdProfesional, generarIdTurno } from '../utils/generarId'
+import { validarTurno } from '../utils/validaciones'
 
 export const CLAVE_PERSISTENCIA = 'unisexHairSaloonDatos'
 
@@ -123,4 +124,63 @@ export function existeConflictoTurno(
       turno.estado === 'confirmado' &&
       turno.id !== turnoIdExcluido
   )
+}
+
+export function reservarTurno(estado, datosTurno) {
+  const erroresCampos = validarTurno(datosTurno)
+
+  if (Object.keys(erroresCampos).length > 0) {
+    return {
+      exito: false,
+      mensaje: Object.values(erroresCampos)[0],
+      errores: erroresCampos,
+    }
+  }
+
+  const profesional = obtenerProfesionalPorId(estado, datosTurno.profesionalId)
+
+  if (!profesional) {
+    return {
+      exito: false,
+      mensaje: 'El profesional seleccionado no existe.',
+      errores: { general: 'El profesional seleccionado no existe.' },
+    }
+  }
+
+  if (!profesional.diasDisponibles.includes(datosTurno.dia)) {
+    return {
+      exito: false,
+      mensaje: 'El profesional no atiende ese día.',
+      errores: { general: 'El profesional no atiende ese día.' },
+    }
+  }
+
+  if (!profesional.horariosDisponibles.includes(datosTurno.hora)) {
+    return {
+      exito: false,
+      mensaje: 'Ese horario no está disponible para el profesional.',
+      errores: { general: 'Ese horario no está disponible para el profesional.' },
+    }
+  }
+
+  const hayConflicto = existeConflictoTurno(estado, {
+    profesionalId: datosTurno.profesionalId,
+    dia: datosTurno.dia,
+    hora: datosTurno.hora,
+  })
+
+  if (hayConflicto) {
+    return {
+      exito: false,
+      mensaje: 'Ese horario ya está ocupado. Elegí otro.',
+      errores: { general: 'Ese horario ya está ocupado. Elegí otro.' },
+    }
+  }
+
+  return {
+    exito: true,
+    mensaje: 'Turno reservado correctamente.',
+    errores: {},
+    datosTurno,
+  }
 }

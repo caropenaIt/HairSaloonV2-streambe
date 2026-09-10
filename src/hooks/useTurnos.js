@@ -1,8 +1,10 @@
 import { useMemo } from 'react'
 import { useAppContext } from '../context/AppContext'
+import { reservarTurno as ejecutarReserva } from '../services/dataService'
 
 export function useTurnos() {
   const {
+    estado,
     turnos,
     agregarTurno,
     editarTurno,
@@ -12,21 +14,18 @@ export function useTurnos() {
   } = useAppContext()
 
   function reservarTurno(datosTurno) {
-    const conflicto = existeConflictoTurno({
-      profesionalId: datosTurno.profesionalId,
-      dia: datosTurno.dia,
-      hora: datosTurno.hora,
-    })
+    const resultado = ejecutarReserva(estado, datosTurno)
 
-    if (conflicto) {
+    if (!resultado.exito) {
       return {
         exito: false,
-        mensaje: 'Ese horario ya está ocupado. Elegí otro.',
+        mensaje: resultado.mensaje,
+        errores: resultado.errores,
       }
     }
 
-    agregarTurno(datosTurno)
-    return { exito: true, mensaje: 'Turno reservado correctamente.' }
+    agregarTurno(resultado.datosTurno)
+    return { exito: true, mensaje: resultado.mensaje }
   }
 
   function modificarTurno(turnoId, datosActualizados) {
