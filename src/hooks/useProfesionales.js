@@ -38,7 +38,7 @@ export function useProfesionales() {
     )
   }
 
-  function eliminarProfesional(profesionalId) {
+  async function eliminarProfesional(profesionalId) {
     if (tieneTurnosActivos(profesionalId)) {
       return {
         exito: false,
@@ -47,7 +47,15 @@ export function useProfesionales() {
       }
     }
 
-    borrarProfesional(profesionalId)
+    const respuesta = await borrarProfesional(profesionalId)
+
+    if (!respuesta?.exito) {
+      return {
+        exito: false,
+        mensaje: respuesta?.mensaje || 'No se pudo eliminar el profesional.',
+      }
+    }
+
     return { exito: true, mensaje: 'Profesional eliminado correctamente.' }
   }
 

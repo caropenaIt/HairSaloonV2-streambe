@@ -8,12 +8,19 @@ import {
 } from 'react'
 import {
   actualizarProfesional,
+  actualizarProfesionalApi,
   actualizarTurno,
+  actualizarTurnoApi,
   cancelarTurno,
+  cancelarTurnoApi,
+  cargarDatosDesdeApi,
   crearEstadoInicial,
   crearProfesional,
+  crearProfesionalApi,
   crearTurno,
+  crearTurnoApi,
   eliminarProfesional,
+  eliminarProfesionalApi,
   existeConflictoTurno,
   obtenerProfesionalPorId,
   obtenerProfesionales,
@@ -25,6 +32,7 @@ import {
 const AppContext = createContext(null)
 
 const ACCIONES = {
+  CARGAR_DATOS: 'CARGAR_DATOS',
   AGREGAR_PROFESIONAL: 'AGREGAR_PROFESIONAL',
   EDITAR_PROFESIONAL: 'EDITAR_PROFESIONAL',
   BORRAR_PROFESIONAL: 'BORRAR_PROFESIONAL',
@@ -35,6 +43,8 @@ const ACCIONES = {
 
 function reducer(estado, accion) {
   switch (accion.type) {
+    case ACCIONES.CARGAR_DATOS:
+      return accion.payload
     case ACCIONES.AGREGAR_PROFESIONAL:
       return crearProfesional(estado, accion.payload)
     case ACCIONES.EDITAR_PROFESIONAL:
@@ -61,6 +71,22 @@ export function AppProvider({ children }) {
   const esPrimerRender = useRef(true)
 
   useEffect(() => {
+    let cancelado = false
+
+    async function cargarInicial() {
+      const datos = await cargarDatosDesdeApi()
+      if (!cancelado) {
+        dispatch({ type: ACCIONES.CARGAR_DATOS, payload: datos })
+      }
+    }
+
+    cargarInicial()
+    return () => {
+      cancelado = true
+    }
+  }, [])
+
+  useEffect(() => {
     if (esPrimerRender.current) {
       esPrimerRender.current = false
       return
@@ -71,23 +97,79 @@ export function AppProvider({ children }) {
 
   const acciones = useMemo(
     () => ({
-      agregarProfesional: (datos) =>
-        dispatch({ type: ACCIONES.AGREGAR_PROFESIONAL, payload: datos }),
-      editarProfesional: (id, datos) =>
-        dispatch({
-          type: ACCIONES.EDITAR_PROFESIONAL,
-          payload: { id, datos },
-        }),
-      borrarProfesional: (id) =>
-        dispatch({ type: ACCIONES.BORRAR_PROFESIONAL, payload: id }),
-      agregarTurno: (datos) =>
-        dispatch({ type: ACCIONES.AGREGAR_TURNO, payload: datos }),
-      editarTurno: (id, datos) =>
-        dispatch({ type: ACCIONES.EDITAR_TURNO, payload: { id, datos } }),
-      cancelarTurno: (id) =>
-        dispatch({ type: ACCIONES.CANCELAR_TURNO, payload: id }),
+      agregarProfesional: async (datos) => {
+        try {
+          const respuesta = await crearProfesionalApi(datos)
+          dispatch({
+            type: ACCIONES.AGREGAR_PROFESIONAL,
+            payload: respuesta.profesional ?? datos,
+          })
+          return { exito: true, mensaje: respuesta.mensaje || 'Profesional creado correctamente.' }
+        } catch (error) {
+          dispatch({ type: ACCIONES.AGREGAR_PROFESIONAL, payload: datos })
+          return { exito: false, mensaje: error.message }
+        }
+      },
+      editarProfesional: async (id, datos) => {
+        try {
+          const respuesta = await actualizarProfesionalApi(id, datos)
+          dispatch({
+            type: ACCIONES.EDITAR_PROFESIONAL,
+            payload: { id, datos: respuesta.profesional ?? datos },
+          })
+          return { exito: true, mensaje: respuesta.mensaje || 'Profesional actualizado correctamente.' }
+        } catch (error) {
+          dispatch({
+            type: ACCIONES.EDITAR_PROFESIONAL,
+            payload: { id, datos },
+          })
+          return { exito: false, mensaje: error.message }
+        }
+      },
+      borrarProfesional: async (id) => {
+        try {
+          const respuesta = await eliminarProfesionalApi(id)
+          dispatch({ type: ACCIONES.BORRAR_PROFESIONAL, payload: id })
+          return { exito: true, mensaje: respuesta.mensaje || 'Profesional eliminado correctamente.' }
+        } catch (error) {
+          return { exito: false, mensaje: error.message }
+        }
+      },
+      agregarTurno: async (datos) => {
+        try {
+          const respuesta = await crearTurnoApi(datos)
+          dispatch({
+            type: ACCIONES.AGREGAR_TURNO,
+            payload: respuesta.turno ?? { ...datos, estado: 'confirmado' },
+          })
+          return { exito: true, mensaje: respuesta.mensaje || 'Turno reservado correctamente.' }
+        } catch (error) {
+          return { exito: false, mensaje: error.message }
+        }
+      },
+      editarTurno: async (id, datos) => {
+        try {
+          const respuesta = await actualizarTurnoApi(id, datos)
+          dispatch({
+            type: ACCIONES.EDITAR_TURNO,
+            payload: { id, datos: respuesta.turno ?? datos },
+          })
+          return { exito: true, mensaje: respuesta.mensaje || 'Turno modificado correctamente.' }
+        } catch (error) {
+          return { exito: false, mensaje: error.message }
+        }
+      },
+      cancelarTurno: async (id) => {
+        try {
+          const respuesta = await cancelarTurnoApi(id)
+          dispatch({ type: ACCIONES.CANCELAR_TURNO, payload: id })
+          return { exito: true, mensaje: respuesta.mensaje || 'Turno cancelado correctamente.' }
+        } catch (error) {
+          return { exito: false, mensaje: error.message }
+        }
+      },
     }),
-    []
+    [estado]
   )
 
   const valor = useMemo(

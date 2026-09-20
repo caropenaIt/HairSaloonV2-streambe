@@ -3,6 +3,7 @@ import { generarIdProfesional, generarIdTurno } from '../utils/generarId'
 import { validarTurno } from '../utils/validaciones'
 
 export const CLAVE_PERSISTENCIA = 'unisexHairSaloonDatos'
+const API_BASE_URL = 'http://localhost:3001/api'
 
 function clonarDatosIniciales() {
   return JSON.parse(JSON.stringify(datosIniciales))
@@ -27,6 +28,95 @@ export function persistirDatos(estado) {
 
 export function crearEstadoInicial() {
   return leerDatosPersistidos() ?? clonarDatosIniciales()
+}
+
+async function requestJson(path, opciones = {}) {
+  const respuesta = await fetch(`${API_BASE_URL}${path}`, {
+    headers: {
+      'Content-Type': 'application/json',
+      ...(opciones.headers || {}),
+    },
+    ...opciones,
+  })
+
+  const contenido = await respuesta.json().catch(() => ({}))
+
+  if (!respuesta.ok) {
+    throw new Error(contenido.mensaje || 'Error en la solicitud')
+  }
+
+  return contenido
+}
+
+export async function cargarDatosDesdeApi() {
+  try {
+    const [profesionales, turnos] = await Promise.all([
+      requestJson('/profesionales'),
+      requestJson('/turnos'),
+    ])
+
+    return {
+      profesionales,
+      turnos,
+      configuracion: {
+        ultimoIdProfesional: profesionales.reduce(
+          (maximo, profesional) => Math.max(maximo, profesional.id || 0),
+          0
+        ),
+        ultimoIdTurno: turnos.reduce(
+          (maximo, turno) => Math.max(maximo, turno.id || 0),
+          0
+        ),
+      },
+    }
+  } catch {
+    const estadoLocal = crearEstadoInicial()
+    return estadoLocal
+  }
+}
+
+export async function obtenerProfesionalesApi() {
+  return requestJson('/profesionales')
+}
+
+export async function obtenerTurnosApi() {
+  return requestJson('/turnos')
+}
+
+export async function crearProfesionalApi(datosProfesional) {
+  return requestJson('/profesionales', {
+    method: 'POST',
+    body: JSON.stringify(datosProfesional),
+  })
+}
+
+export async function actualizarProfesionalApi(id, datosProfesional) {
+  return requestJson(`/profesionales/${id}`, {
+    method: 'PUT',
+    body: JSON.stringify(datosProfesional),
+  })
+}
+
+export async function eliminarProfesionalApi(id) {
+  return requestJson(`/profesionales/${id}`, { method: 'DELETE' })
+}
+
+export async function crearTurnoApi(datosTurno) {
+  return requestJson('/turnos', {
+    method: 'POST',
+    body: JSON.stringify(datosTurno),
+  })
+}
+
+export async function actualizarTurnoApi(id, datosTurno) {
+  return requestJson(`/turnos/${id}`, {
+    method: 'PUT',
+    body: JSON.stringify(datosTurno),
+  })
+}
+
+export async function cancelarTurnoApi(id) {
+  return requestJson(`/turnos/${id}/cancelar`, { method: 'PATCH' })
 }
 
 export function obtenerProfesionales(estado) {

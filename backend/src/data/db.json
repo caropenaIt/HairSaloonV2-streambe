@@ -1,0 +1,97 @@
+{
+  "profesionales": [
+    {
+      "id": 1,
+      "nombre": "Juan",
+      "apellido": "García",
+      "especialidad": "Barbería",
+      "diasDisponibles": ["Martes"],
+      "horariosDisponibles": ["12:00", "13:30", "15:00"],
+      "descripcion": "Juan es un experimentado barbero experto en cortes de ayer y de hoy. Apto para hombres de todas las generaciones.",
+      "avatarUrl": "/avatares/juan-barbero.png"
+    },
+    {
+      "id": 2,
+      "nombre": "Marta",
+      "apellido": "López",
+      "especialidad": "Peluquería",
+      "diasDisponibles": ["Miércoles"],
+      "horariosDisponibles": ["13:00", "14:45", "16:00"],
+      "descripcion": "Marta es una apasionada del corte, tiene el poder de saber qué corte necesita cada cliente con solo verlos cruzar la puerta.",
+      "avatarUrl": "/avatares/marta-corte.png"
+    },
+    {
+      "id": 3,
+      "nombre": "Rocío",
+      "apellido": "Fernández",
+      "especialidad": "Colorista",
+      "diasDisponibles": ["Jueves"],
+      "horariosDisponibles": ["12:30", "15:30", "17:00"],
+      "descripcion": "La nueva integrante de la peluquería, Rocío le encanta experimentar y probar colores nuevos. Si buscás un rotundo cambio de look, es por ahí.",
+      "avatarUrl": "/avatares/rocio-colorista.png"
+    },
+    {
+      "id": 4,
+      "nombre": "Mario",
+      "apellido": "Ruiz",
+      "especialidad": "Peluquería",
+      "diasDisponibles": ["Viernes"],
+      "horariosDisponibles": ["15:30", "16:00", "17:30"],
+      "descripcion": "El mejor con los niños (y grandes también), te cortás el pelo y, de paso, hacés terapia. Un peluquero tradicional.",
+      "avatarUrl": "/avatares/mario-corte.png"
+    },
+    {
+      "id": 5,
+      "nombre": "Éric",
+      "apellido": "Martínez",
+      "especialidad": "Colorista",
+      "diasDisponibles": ["Sábado"],
+      "horariosDisponibles": ["09:30", "10:00", "11:00"],
+      "descripcion": "El más experimentado del grupo. Elige los productos de mejor calidad que mejor se adapten a tu cabello.",
+      "avatarUrl": "/avatares/eric-colorista.png"
+    },
+    {
+      "id": 6,
+      "nombre": "Marcelo",
+      "apellido": "Díaz",
+      "especialidad": "Barbería",
+      "diasDisponibles": ["Lunes"],
+      "horariosDisponibles": ["15:30", "16:30", "17:30"],
+      "descripcion": "Marcelo busca constantemente innovar y reversionar cortes clásicos para hacer destacar su arte. Si buscás un estilo único, es el indicado.",
+      "avatarUrl": "/avatares/marcelo-barberia.png"
+    }
+  ],
+  "turnos": [
+    {
+      "id": 1,
+      "dia": "Martes",
+      "hora": "12:00",
+      "profesionalId": 1,
+      "especialidad": "Barbería",
+      "clienteNombre": "María López",
+      "estado": "confirmado"
+    },
+    {
+      "id": 2,
+      "dia": "Miércoles",
+      "hora": "13:00",
+      "profesionalId": 2,
+      "especialidad": "Peluquería",
+      "clienteNombre": "Carlos Pérez",
+      "estado": "confirmado"
+    },
+    {
+      "id": 3,
+      "dia": "Jueves",
+      "hora": "15:30",
+      "profesionalId": 3,
+      "especialidad": "Colorista",
+      "clienteNombre": "Ana Gómez",
+      "estado": "cancelado"
+    }
+  ],
+  "configuracion": {
+    "ultimoIdProfesional": 6,
+    "ultimoIdTurno": 3
+  }
+}

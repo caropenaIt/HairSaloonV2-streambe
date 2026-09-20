@@ -32,8 +32,8 @@ export function GestionTurnos() {
     })
   }, [turnosEnriquecidos, filtroEstado, filtroProfesional, filtroDia])
 
-  function confirmarCancelacion() {
-    const resultado = cancelarTurnoAdmin(turnoCancelando.id)
+  async function confirmarCancelacion() {
+    const resultado = await cancelarTurnoAdmin(turnoCancelando.id)
     setMensajeFeedback(resultado.mensaje)
     setFeedbackEsError(!resultado.exito)
     setTurnoCancelando(null)

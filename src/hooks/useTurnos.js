@@ -13,7 +13,7 @@ export function useTurnos() {
     obtenerProfesionalPorId,
   } = useAppContext()
 
-  function reservarTurno(datosTurno) {
+  async function reservarTurno(datosTurno) {
     const resultado = ejecutarReserva(estado, datosTurno)
 
     if (!resultado.exito) {
@@ -24,11 +24,20 @@ export function useTurnos() {
       }
     }
 
-    agregarTurno(resultado.datosTurno)
+    const respuesta = await agregarTurno(resultado.datosTurno)
+
+    if (!respuesta?.exito) {
+      return {
+        exito: false,
+        mensaje: respuesta?.mensaje || 'No se pudo reservar el turno.',
+        errores: { general: respuesta?.mensaje || 'No se pudo reservar el turno.' },
+      }
+    }
+
     return { exito: true, mensaje: resultado.mensaje }
   }
 
-  function modificarTurno(turnoId, datosActualizados) {
+  async function modificarTurno(turnoId, datosActualizados) {
     const turnoActual = turnos.find((turno) => turno.id === turnoId)
 
     if (!turnoActual) {
@@ -61,11 +70,19 @@ export function useTurnos() {
       }
     }
 
-    editarTurno(turnoId, { dia, hora })
+    const respuesta = await editarTurno(turnoId, { dia, hora })
+
+    if (!respuesta?.exito) {
+      return {
+        exito: false,
+        mensaje: respuesta?.mensaje || 'No se pudo modificar el turno.',
+      }
+    }
+
     return { exito: true, mensaje: 'Turno modificado correctamente.' }
   }
 
-  function cancelarTurnoCliente(turnoId) {
+  async function cancelarTurnoCliente(turnoId) {
     const turnoActual = turnos.find((turno) => turno.id === turnoId)
 
     if (!turnoActual) {
@@ -76,7 +93,15 @@ export function useTurnos() {
       return { exito: false, mensaje: 'El turno ya estaba cancelado.' }
     }
 
-    cancelarTurno(turnoId)
+    const respuesta = await cancelarTurno(turnoId)
+
+    if (!respuesta?.exito) {
+      return {
+        exito: false,
+        mensaje: respuesta?.mensaje || 'No se pudo cancelar el turno.',
+      }
+    }
+
     return { exito: true, mensaje: 'Turno cancelado correctamente.' }
   }
 

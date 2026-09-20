@@ -32,20 +32,26 @@ export function GestionProfesionales({ esAltaNueva = false }) {
     ? obtenerProfesionalPorId(Number(id))
     : null
 
-  function manejarCrear(datos) {
-    agregarProfesional(datos)
-    setMensajeFeedback('Profesional creado correctamente.')
-    navigate('/admin/profesionales')
+  async function manejarCrear(datos) {
+    const resultado = await agregarProfesional(datos)
+    setMensajeFeedback(resultado.exito ? resultado.mensaje : `Error: ${resultado.mensaje}`)
+
+    if (resultado.exito) {
+      navigate('/admin/profesionales')
+    }
   }
 
-  function manejarEditar(datos) {
-    editarProfesional(Number(id), datos)
-    setMensajeFeedback('Profesional actualizado correctamente.')
-    navigate('/admin/profesionales')
+  async function manejarEditar(datos) {
+    const resultado = await editarProfesional(Number(id), datos)
+    setMensajeFeedback(resultado.exito ? resultado.mensaje : `Error: ${resultado.mensaje}`)
+
+    if (resultado.exito) {
+      navigate('/admin/profesionales')
+    }
   }
 
-  function manejarEliminar() {
-    const resultado = eliminarProfesional(profesionalEliminando.id)
+  async function manejarEliminar() {
+    const resultado = await eliminarProfesional(profesionalEliminando.id)
     setMensajeFeedback(resultado.exito ? resultado.mensaje : `Error: ${resultado.mensaje}`)
     if (resultado.exito) {
       setProfesionalEliminando(null)

@@ -46,8 +46,8 @@ export function MisTurnos() {
     setTurnoEditando(null)
   }
 
-  function manejarModificar(datos) {
-    const resultado = modificarTurno(turnoEditando.id, datos)
+  async function manejarModificar(datos) {
+    const resultado = await modificarTurno(turnoEditando.id, datos)
     setMensajeFeedback(resultado.mensaje)
     setFeedbackEsError(!resultado.exito)
 
@@ -56,8 +56,8 @@ export function MisTurnos() {
     }
   }
 
-  function confirmarCancelacion() {
-    const resultado = cancelarTurnoCliente(turnoCancelando.id)
+  async function confirmarCancelacion() {
+    const resultado = await cancelarTurnoCliente(turnoCancelando.id)
     setMensajeFeedback(resultado.mensaje)
     setFeedbackEsError(!resultado.exito)
     setTurnoCancelando(null)

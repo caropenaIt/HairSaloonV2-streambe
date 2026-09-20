@@ -8,7 +8,7 @@ export function ConfirmacionTurno({ profesional, dia, hora, onConfirmar }) {
   const [errores, setErrores] = useState({})
   const [mensajeExito, setMensajeExito] = useState('')
 
-  function manejarConfirmar() {
+  async function manejarConfirmar() {
     const datosTurno = {
       clienteNombre,
       dia,
@@ -17,14 +17,14 @@ export function ConfirmacionTurno({ profesional, dia, hora, onConfirmar }) {
       especialidad: profesional.especialidad,
     }
 
-    const resultado = onConfirmar(datosTurno)
+    const resultado = await onConfirmar(datosTurno)
 
     if (resultado.exito) {
       setMensajeExito(resultado.mensaje)
       setClienteNombre('')
       setErrores({})
     } else {
-      setErrores(resultado.errores)
+      setErrores(resultado.errores || {})
     }
   }
 

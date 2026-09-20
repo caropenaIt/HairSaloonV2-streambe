@@ -30,6 +30,24 @@ export function ReservarTurno() {
     setHora('')
   }
 
+  async function confirmarReserva() {
+    if (!profesionalSeleccionado || !dia || !hora) {
+      return
+    }
+
+    const resultado = await reservarTurno({
+      profesionalId: profesionalSeleccionado.id,
+      dia,
+      hora,
+      clienteNombre: 'Cliente de prueba',
+      especialidad: profesionalSeleccionado.especialidad,
+    })
+
+    if (resultado.exito) {
+      setPasoActual(2)
+    }
+  }
+
   function puedeAvanzar() {
     if (pasoActual === 0) return profesionalSeleccionado !== null
     if (pasoActual === 1) return dia !== '' && hora !== ''
