@@ -90,6 +90,7 @@
       "estado": "cancelado"
     }
   ],
+  "usuarios": [],
   "configuracion": {
     "ultimoIdProfesional": 6,
     "ultimoIdTurno": 3

@@ -39,6 +39,10 @@ export function AdminHome() {
           <h2>Gestión de turnos</h2>
           <p>Vista global de todas las reservas.</p>
         </Link>
+        <Link to="/admin/acceso/registro" className="adminHomeTarjeta">
+          <h2>Crear cuenta de administrador</h2>
+          <p>Agregar una cuenta con permisos de administración.</p>
+        </Link>
       </div>
     </section>
   )

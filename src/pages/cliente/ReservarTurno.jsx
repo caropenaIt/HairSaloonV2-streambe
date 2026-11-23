@@ -4,6 +4,7 @@ import { ConfirmacionTurno } from '../../components/turnos/ConfirmacionTurno'
 import { SelectorFechaHora } from '../../components/turnos/SelectorFechaHora'
 import { SelectorProfesional } from '../../components/turnos/SelectorProfesional'
 import { Boton } from '../../components/ui/Boton'
+import { useAppContext } from '../../context/AppContext'
 import { useTurnos } from '../../hooks/useTurnos'
 import './ReservarTurno.css'
 
@@ -11,6 +12,7 @@ const PASOS = ['Profesional', 'Fecha y hora', 'Confirmación']
 
 export function ReservarTurno() {
   const { reservarTurno } = useTurnos()
+  const { usuario } = useAppContext()
   const [pasoActual, setPasoActual] = useState(0)
   const [profesionalSeleccionado, setProfesionalSeleccionado] = useState(null)
   const [dia, setDia] = useState('')
@@ -28,24 +30,6 @@ export function ReservarTurno() {
     setProfesionalSeleccionado(profesional)
     setDia('')
     setHora('')
-  }
-
-  async function confirmarReserva() {
-    if (!profesionalSeleccionado || !dia || !hora) {
-      return
-    }
-
-    const resultado = await reservarTurno({
-      profesionalId: profesionalSeleccionado.id,
-      dia,
-      hora,
-      clienteNombre: 'Cliente de prueba',
-      especialidad: profesionalSeleccionado.especialidad,
-    })
-
-    if (resultado.exito) {
-      setPasoActual(2)
-    }
   }
 
   function puedeAvanzar() {
@@ -100,6 +84,7 @@ export function ReservarTurno() {
             profesional={profesionalSeleccionado}
             dia={dia}
             hora={hora}
+            clienteNombre={usuario.nombre}
             onConfirmar={reservarTurno}
           />
         )}

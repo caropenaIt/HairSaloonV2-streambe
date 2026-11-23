@@ -1,7 +1,24 @@
-import { NavLink } from 'react-router-dom'
+import { useState } from 'react'
+import { NavLink, useNavigate } from 'react-router-dom'
+import { useAppContext } from '../../context/AppContext'
 import './Navbar.css'
 
 export function Navbar() {
+  const navigate = useNavigate()
+  const { usuario, sesionCargada, cerrarSesion } = useAppContext()
+  const [mensajeError, setMensajeError] = useState('')
+
+  async function manejarCierreSesion() {
+    const resultado = await cerrarSesion()
+    if (!resultado.exito) {
+      setMensajeError(resultado.mensaje)
+      return
+    }
+
+    setMensajeError('')
+    navigate('/acceso')
+  }
+
   return (
     <header className="navbar">
       <div className="navbarContenedor">
@@ -22,23 +39,51 @@ export function Navbar() {
           >
             Inicio
           </NavLink>
-          <NavLink
-            to="/cliente"
-            className={({ isActive }) =>
-              isActive ? 'navbarEnlace navbarEnlaceActivo' : 'navbarEnlace'
-            }
-          >
-            Cliente
-          </NavLink>
-          <NavLink
-            to="/admin"
-            className={({ isActive }) =>
-              isActive ? 'navbarEnlace navbarEnlaceActivo' : 'navbarEnlace'
-            }
-          >
-            Admin
-          </NavLink>
+          {sesionCargada && usuario?.rol === 'cliente' && (
+            <NavLink
+              to="/cliente"
+              className={({ isActive }) =>
+                isActive ? 'navbarEnlace navbarEnlaceActivo' : 'navbarEnlace'
+              }
+            >
+              Cliente
+            </NavLink>
+          )}
+          {sesionCargada && usuario?.rol === 'administrador' && (
+            <NavLink
+              to="/admin"
+              className={({ isActive }) =>
+                isActive ? 'navbarEnlace navbarEnlaceActivo' : 'navbarEnlace'
+              }
+            >
+              Admin
+            </NavLink>
+          )}
+          {sesionCargada && !usuario && (
+            <NavLink
+              to="/acceso"
+              className={({ isActive }) =>
+                isActive ? 'navbarEnlace navbarEnlaceActivo' : 'navbarEnlace'
+              }
+            >
+              Acceso
+            </NavLink>
+          )}
+          {sesionCargada && usuario && (
+            <button
+              type="button"
+              className="navbarEnlace"
+              onClick={manejarCierreSesion}
+            >
+              Cerrar sesión
+            </button>
+          )}
         </nav>
+        {mensajeError && (
+          <p className="navbarError" role="alert">
+            {mensajeError}
+          </p>
+        )}
       </div>
     </header>
   )

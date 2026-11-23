@@ -3,18 +3,48 @@ import {
   cancelarTurnoController,
   crearTurnoController,
   listarTurnosController,
-  listarTurnosPorClienteController,
+  listarMisTurnosController,
   listarTurnosPorProfesionalController,
   modificarTurnoController,
 } from '../controllers/turnosController.js'
+import { requerirAutenticacion } from '../middleware/autenticacion.js'
+import { capturarErroresAsync } from '../middleware/capturarErroresAsync.js'
+import { validarIdRuta } from '../middleware/validarIdRuta.js'
 
 const router = Router()
 
-router.get('/', listarTurnosController)
-router.get('/profesional/:id', listarTurnosPorProfesionalController)
-router.get('/cliente/:nombre', listarTurnosPorClienteController)
-router.post('/', crearTurnoController)
-router.put('/:id', modificarTurnoController)
-router.patch('/:id/cancelar', cancelarTurnoController)
+router.get(
+  '/',
+  requerirAutenticacion('administrador'),
+  capturarErroresAsync(listarTurnosController)
+)
+router.get(
+  '/mis',
+  requerirAutenticacion('cliente'),
+  capturarErroresAsync(listarMisTurnosController)
+)
+router.get(
+  '/profesional/:id',
+  validarIdRuta,
+  requerirAutenticacion('administrador'),
+  capturarErroresAsync(listarTurnosPorProfesionalController)
+)
+router.post(
+  '/',
+  requerirAutenticacion('cliente'),
+  capturarErroresAsync(crearTurnoController)
+)
+router.put(
+  '/:id',
+  validarIdRuta,
+  requerirAutenticacion('administrador', 'cliente'),
+  capturarErroresAsync(modificarTurnoController)
+)
+router.patch(
+  '/:id/cancelar',
+  validarIdRuta,
+  requerirAutenticacion('administrador', 'cliente'),
+  capturarErroresAsync(cancelarTurnoController)
+)
 
 export default router

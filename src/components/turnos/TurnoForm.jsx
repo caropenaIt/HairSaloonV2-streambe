@@ -6,11 +6,12 @@ import './TurnoForm.css'
 export function TurnoForm({ turno, onSubmit, onCancelar }) {
   const [dia, setDia] = useState(turno.dia)
   const [hora, setHora] = useState(turno.hora)
-  const { diasDisponibles, horariosDisponibles } = useDisponibilidad(
-    turno.profesionalId,
-    dia,
-    turno.id
-  )
+  const {
+    diasDisponibles,
+    horariosDisponibles,
+    cargando,
+    errorDisponibilidad,
+  } = useDisponibilidad(turno.profesionalId, dia, turno.id)
 
   function manejarSubmit(evento) {
     evento.preventDefault()
@@ -49,7 +50,13 @@ export function TurnoForm({ turno, onSubmit, onCancelar }) {
 
       <div className="turnoFormCampo">
         <span className="turnoFormEtiqueta">Hora</span>
-        {horariosDisponibles.length === 0 ? (
+        {errorDisponibilidad ? (
+          <p className="turnoFormAviso" role="alert">
+            {errorDisponibilidad}
+          </p>
+        ) : cargando ? (
+          <p className="turnoFormAviso">Consultando horarios...</p>
+        ) : horariosDisponibles.length === 0 ? (
           <p className="turnoFormAviso">No hay horarios disponibles para este día.</p>
         ) : (
           <div className="turnoFormHorarios">

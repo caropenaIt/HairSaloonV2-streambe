@@ -1,0 +1,56 @@
+.acceso {
+  width: min(100% - 2rem, 32rem);
+  margin: 3rem auto;
+  padding: 2rem;
+  border: 1px solid var(--colorBorde);
+  border-radius: var(--radio);
+  background: var(--colorSuperficie);
+  box-shadow: var(--sombraSuave);
+}
+
+.accesoHeader {
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+.accesoHeader p {
+  margin-top: 0.5rem;
+}
+
+.accesoFormulario {
+  display: grid;
+  gap: 1rem;
+}
+
+.accesoCampo {
+  display: grid;
+  gap: 0.4rem;
+}
+
+.accesoCampo input {
+  width: 100%;
+  padding: 0.7rem 0.8rem;
+  border: 1px solid var(--colorBorde);
+  border-radius: var(--radio);
+  background: var(--colorFondo);
+  color: var(--colorTexto);
+}
+
+.accesoAyuda {
+  color: var(--colorTextoSuave);
+  font-size: 0.875rem;
+}
+
+.accesoError {
+  color: var(--colorError);
+}
+
+.accesoAlternar {
+  display: block;
+  margin: 1.25rem auto 0;
+  border: 0;
+  background: transparent;
+  color: var(--colorAcentoOscuro);
+  cursor: pointer;
+  text-decoration: underline;
+}

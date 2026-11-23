@@ -3,48 +3,31 @@ import { Link } from 'react-router-dom'
 import { TurnoForm } from '../../components/turnos/TurnoForm'
 import { TurnoList } from '../../components/turnos/TurnoList'
 import { Modal } from '../../components/ui/Modal'
+import { useAppContext } from '../../context/AppContext'
 import { useTurnos } from '../../hooks/useTurnos'
 import './MisTurnos.css'
 
 export function MisTurnos() {
   const {
-    obtenerTurnosPorCliente,
-    enriquecerTurno,
+    turnosEnriquecidos,
     modificarTurno,
     cancelarTurnoCliente,
   } = useTurnos()
+  const { usuario } = useAppContext()
 
-  const [nombreBusqueda, setNombreBusqueda] = useState('')
-  const [nombreConsultado, setNombreConsultado] = useState('')
   const [turnoEditando, setTurnoEditando] = useState(null)
   const [turnoCancelando, setTurnoCancelando] = useState(null)
   const [mensajeFeedback, setMensajeFeedback] = useState('')
   const [feedbackEsError, setFeedbackEsError] = useState(false)
   const [filtroEstado, setFiltroEstado] = useState('todos')
 
-  const turnosCliente = useMemo(() => {
-    if (!nombreConsultado) {
-      return []
-    }
-
-    return obtenerTurnosPorCliente(nombreConsultado).map(enriquecerTurno)
-  }, [nombreConsultado, obtenerTurnosPorCliente, enriquecerTurno])
-
   const turnosFiltrados = useMemo(() => {
     if (filtroEstado === 'todos') {
-      return turnosCliente
+      return turnosEnriquecidos
     }
 
-    return turnosCliente.filter((turno) => turno.estado === filtroEstado)
-  }, [turnosCliente, filtroEstado])
-
-  function manejarBuscar(evento) {
-    evento.preventDefault()
-    setNombreConsultado(nombreBusqueda.trim())
-    setMensajeFeedback('')
-    setFeedbackEsError(false)
-    setTurnoEditando(null)
-  }
+    return turnosEnriquecidos.filter((turno) => turno.estado === filtroEstado)
+  }, [turnosEnriquecidos, filtroEstado])
 
   async function manejarModificar(datos) {
     const resultado = await modificarTurno(turnoEditando.id, datos)
@@ -70,23 +53,8 @@ export function MisTurnos() {
           ← Volver al área cliente
         </Link>
         <h1>Mis turnos</h1>
-        <p>Ingresá tu nombre para ver y gestionar tus reservas.</p>
+        <p>Turnos de la cuenta de {usuario.nombre}.</p>
       </header>
-
-      <form className="misTurnosBusqueda" onSubmit={manejarBuscar}>
-        <label htmlFor="nombreCliente">Tu nombre</label>
-        <div className="misTurnosBusquedaInput">
-          <input
-            id="nombreCliente"
-            type="search"
-            value={nombreBusqueda}
-            onChange={(evento) => setNombreBusqueda(evento.target.value)}
-            placeholder="Ej: María López"
-            required
-          />
-          <button type="submit">Buscar</button>
-        </div>
-      </form>
 
       {mensajeFeedback && (
         <p
@@ -99,16 +67,14 @@ export function MisTurnos() {
         </p>
       )}
 
-      {nombreConsultado && (
-        <TurnoList
-          turnos={turnosFiltrados}
-          filtroEstado={filtroEstado}
-          onChangeFiltroEstado={setFiltroEstado}
-          onModificar={setTurnoEditando}
-          onCancelar={setTurnoCancelando}
-          mostrarAccionesCliente
-        />
-      )}
+      <TurnoList
+        turnos={turnosFiltrados}
+        filtroEstado={filtroEstado}
+        onChangeFiltroEstado={setFiltroEstado}
+        onModificar={setTurnoEditando}
+        onCancelar={setTurnoCancelando}
+        mostrarAccionesCliente
+      />
 
       {turnoEditando && (
         <TurnoForm

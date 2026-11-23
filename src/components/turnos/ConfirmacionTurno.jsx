@@ -3,8 +3,13 @@ import { obtenerNombreCompleto } from '../../utils/validaciones'
 import { Boton } from '../ui/Boton'
 import './ConfirmacionTurno.css'
 
-export function ConfirmacionTurno({ profesional, dia, hora, onConfirmar }) {
-  const [clienteNombre, setClienteNombre] = useState('')
+export function ConfirmacionTurno({
+  profesional,
+  dia,
+  hora,
+  clienteNombre,
+  onConfirmar,
+}) {
   const [errores, setErrores] = useState({})
   const [mensajeExito, setMensajeExito] = useState('')
 
@@ -14,14 +19,12 @@ export function ConfirmacionTurno({ profesional, dia, hora, onConfirmar }) {
       dia,
       hora,
       profesionalId: profesional.id,
-      especialidad: profesional.especialidad,
     }
 
     const resultado = await onConfirmar(datosTurno)
 
     if (resultado.exito) {
       setMensajeExito(resultado.mensaje)
-      setClienteNombre('')
       setErrores({})
     } else {
       setErrores(resultado.errores || {})
@@ -48,14 +51,9 @@ export function ConfirmacionTurno({ profesional, dia, hora, onConfirmar }) {
       </div>
 
       <div className="confirmacionTurnoCampo">
-        <label htmlFor="clienteNombre">Tu nombre *</label>
-        <input
-          id="clienteNombre"
-          type="text"
-          value={clienteNombre}
-          onChange={(evento) => setClienteNombre(evento.target.value)}
-          placeholder="Ej: Ana Gómez"
-        />
+        <p>
+          <strong>Reservado por:</strong> {clienteNombre}
+        </p>
         {errores.clienteNombre && (
           <span className="confirmacionTurnoError">{errores.clienteNombre}</span>
         )}

@@ -5,8 +5,14 @@
       "nombre": "Juan",
       "apellido": "García",
       "especialidad": "Barbería",
-      "diasDisponibles": ["Martes"],
-      "horariosDisponibles": ["12:00", "13:30", "15:00"],
+      "diasDisponibles": [
+        "Martes"
+      ],
+      "horariosDisponibles": [
+        "12:00",
+        "13:30",
+        "15:00"
+      ],
       "descripcion": "Juan es un experimentado barbero experto en cortes de ayer y de hoy. Apto para hombres de todas las generaciones.",
       "avatarUrl": "/avatares/juan-barbero.png"
     },
@@ -15,8 +21,14 @@
       "nombre": "Marta",
       "apellido": "López",
       "especialidad": "Peluquería",
-      "diasDisponibles": ["Miércoles"],
-      "horariosDisponibles": ["13:00", "14:45", "16:00"],
+      "diasDisponibles": [
+        "Miércoles"
+      ],
+      "horariosDisponibles": [
+        "13:00",
+        "14:45",
+        "16:00"
+      ],
       "descripcion": "Marta es una apasionada del corte, tiene el poder de saber qué corte necesita cada cliente con solo verlos cruzar la puerta.",
       "avatarUrl": "/avatares/marta-corte.png"
     },
@@ -25,8 +37,14 @@
       "nombre": "Rocío",
       "apellido": "Fernández",
       "especialidad": "Colorista",
-      "diasDisponibles": ["Jueves"],
-      "horariosDisponibles": ["12:30", "15:30", "17:00"],
+      "diasDisponibles": [
+        "Jueves"
+      ],
+      "horariosDisponibles": [
+        "12:30",
+        "15:30",
+        "17:00"
+      ],
       "descripcion": "La nueva integrante de la peluquería, Rocío le encanta experimentar y probar colores nuevos. Si buscás un rotundo cambio de look, es por ahí.",
       "avatarUrl": "/avatares/rocio-colorista.png"
     },
@@ -35,8 +53,14 @@
       "nombre": "Mario",
       "apellido": "Ruiz",
       "especialidad": "Peluquería",
-      "diasDisponibles": ["Viernes"],
-      "horariosDisponibles": ["15:30", "16:00", "17:30"],
+      "diasDisponibles": [
+        "Viernes"
+      ],
+      "horariosDisponibles": [
+        "15:30",
+        "16:00",
+        "17:30"
+      ],
       "descripcion": "El mejor con los niños (y grandes también), te cortás el pelo y, de paso, hacés terapia. Un peluquero tradicional.",
       "avatarUrl": "/avatares/mario-corte.png"
     },
@@ -45,8 +69,14 @@
       "nombre": "Éric",
       "apellido": "Martínez",
       "especialidad": "Colorista",
-      "diasDisponibles": ["Sábado"],
-      "horariosDisponibles": ["09:30", "10:00", "11:00"],
+      "diasDisponibles": [
+        "Sábado"
+      ],
+      "horariosDisponibles": [
+        "09:30",
+        "10:00",
+        "11:00"
+      ],
       "descripcion": "El más experimentado del grupo. Elige los productos de mejor calidad que mejor se adapten a tu cabello.",
       "avatarUrl": "/avatares/eric-colorista.png"
     },
@@ -55,8 +85,14 @@
       "nombre": "Marcelo",
       "apellido": "Díaz",
       "especialidad": "Barbería",
-      "diasDisponibles": ["Lunes"],
-      "horariosDisponibles": ["15:30", "16:30", "17:30"],
+      "diasDisponibles": [
+        "Lunes"
+      ],
+      "horariosDisponibles": [
+        "15:30",
+        "16:30",
+        "17:30"
+      ],
       "descripcion": "Marcelo busca constantemente innovar y reversionar cortes clásicos para hacer destacar su arte. Si buscás un estilo único, es el indicado.",
       "avatarUrl": "/avatares/marcelo-barberia.png"
     }
@@ -90,6 +126,17 @@
       "estado": "cancelado"
     }
   ],
+  "usuarios": [
+    {
+      "id": "a3fbd390-adf4-4d99-8d10-509ae4b89c18",
+      "nombre": "Carolina Alejandra",
+      "correo": "caropena000@gmail.com",
+      "passwordSalt": "5da1bf599adc3778927167ccf8962c41",
+      "passwordHash": "6b21bd0f7b995df2ab021356013a05841606ae7cadf278609a35a439443a370e56faa2a35fdcfa757ab26f8e7697eff269c7381a0b71502a3700790b5bf7bb63",
+      "rol": "cliente"
+    }
+  ],
+  "administradores": [],
   "configuracion": {
     "ultimoIdProfesional": 6,
     "ultimoIdTurno": 3

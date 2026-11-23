@@ -5,6 +5,7 @@ import {
   listarProfesionales,
   obtenerProfesionalPorId,
 } from '../services/agendaService.js'
+import { responderError } from './responderError.js'
 
 export async function listarProfesionalesController(_req, res) {
   const profesionales = await listarProfesionales()
@@ -26,7 +27,7 @@ export async function crearProfesionalController(req, res) {
     const profesional = await crearProfesional(req.body)
     return res.status(201).json({ mensaje: 'Profesional creado correctamente.', profesional })
   } catch (error) {
-    return res.status(400).json({ mensaje: error.message })
+    return responderError(res, error)
   }
 }
 
@@ -40,7 +41,7 @@ export async function actualizarProfesionalController(req, res) {
 
     return res.json({ mensaje: 'Profesional actualizado correctamente.', profesional })
   } catch (error) {
-    return res.status(400).json({ mensaje: error.message })
+    return responderError(res, error)
   }
 }
 
@@ -49,6 +50,6 @@ export async function eliminarProfesionalController(req, res) {
     await eliminarProfesional(req.params.id)
     return res.json({ mensaje: 'Profesional eliminado correctamente.' })
   } catch (error) {
-    return res.status(400).json({ mensaje: error.message })
+    return responderError(res, error)
   }
 }

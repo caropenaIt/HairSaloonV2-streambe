@@ -5,6 +5,7 @@ import { reservarTurno as ejecutarReserva } from '../services/dataService'
 export function useTurnos() {
   const {
     estado,
+    usuario,
     turnos,
     agregarTurno,
     editarTurno,
@@ -14,7 +15,11 @@ export function useTurnos() {
   } = useAppContext()
 
   async function reservarTurno(datosTurno) {
-    const resultado = ejecutarReserva(estado, datosTurno)
+    const datosConCliente = {
+      ...datosTurno,
+      clienteNombre: usuario?.nombre || '',
+    }
+    const resultado = ejecutarReserva(estado, datosConCliente)
 
     if (!resultado.exito) {
       return {
@@ -105,18 +110,6 @@ export function useTurnos() {
     return { exito: true, mensaje: 'Turno cancelado correctamente.' }
   }
 
-  function obtenerTurnosPorCliente(nombreCliente) {
-    const nombreNormalizado = nombreCliente.trim().toLowerCase()
-
-    if (!nombreNormalizado) {
-      return []
-    }
-
-    return turnos.filter((turno) =>
-      turno.clienteNombre.toLowerCase().includes(nombreNormalizado)
-    )
-  }
-
   function enriquecerTurno(turno) {
     const profesional = obtenerProfesionalPorId(turno.profesionalId)
     return {
@@ -137,7 +130,6 @@ export function useTurnos() {
     modificarTurno,
     cancelarTurnoCliente,
     cancelarTurnoAdmin: cancelarTurnoCliente,
-    obtenerTurnosPorCliente,
     enriquecerTurno,
   }
 }

@@ -3,7 +3,8 @@ import { generarIdProfesional, generarIdTurno } from '../utils/generarId'
 import { validarTurno } from '../utils/validaciones'
 
 export const CLAVE_PERSISTENCIA = 'unisexHairSaloonDatos'
-const API_BASE_URL = 'http://localhost:3001/api'
+const API_BASE_URL =
+  import.meta.env.VITE_API_BASE_URL || 'http://localhost:3001/api'
 
 function clonarDatosIniciales() {
   return JSON.parse(JSON.stringify(datosIniciales))
@@ -31,48 +32,25 @@ export function crearEstadoInicial() {
 }
 
 async function requestJson(path, opciones = {}) {
+  const { headers, ...otrasOpciones } = opciones
   const respuesta = await fetch(`${API_BASE_URL}${path}`, {
+    ...otrasOpciones,
+    credentials: 'include',
     headers: {
       'Content-Type': 'application/json',
-      ...(opciones.headers || {}),
+      ...(headers || {}),
     },
-    ...opciones,
   })
 
   const contenido = await respuesta.json().catch(() => ({}))
 
   if (!respuesta.ok) {
-    throw new Error(contenido.mensaje || 'Error en la solicitud')
+    const error = new Error(contenido.mensaje || 'Error en la solicitud')
+    error.status = respuesta.status
+    throw error
   }
 
   return contenido
-}
-
-export async function cargarDatosDesdeApi() {
-  try {
-    const [profesionales, turnos] = await Promise.all([
-      requestJson('/profesionales'),
-      requestJson('/turnos'),
-    ])
-
-    return {
-      profesionales,
-      turnos,
-      configuracion: {
-        ultimoIdProfesional: profesionales.reduce(
-          (maximo, profesional) => Math.max(maximo, profesional.id || 0),
-          0
-        ),
-        ultimoIdTurno: turnos.reduce(
-          (maximo, turno) => Math.max(maximo, turno.id || 0),
-          0
-        ),
-      },
-    }
-  } catch {
-    const estadoLocal = crearEstadoInicial()
-    return estadoLocal
-  }
 }
 
 export async function obtenerProfesionalesApi() {
@@ -81,6 +59,61 @@ export async function obtenerProfesionalesApi() {
 
 export async function obtenerTurnosApi() {
   return requestJson('/turnos')
+}
+
+export async function obtenerMisTurnosApi() {
+  return requestJson('/turnos/mis')
+}
+
+export async function obtenerDisponibilidadApi(
+  profesionalId,
+  dia,
+  turnoIdExcluido = null
+) {
+  const parametros = new URLSearchParams({ dia })
+  if (turnoIdExcluido !== null) {
+    parametros.set('turnoId', String(turnoIdExcluido))
+  }
+  return requestJson(
+    `/disponibilidad/profesional/${profesionalId}?${parametros.toString()}`
+  )
+}
+
+export async function obtenerSesionApi() {
+  const respuesta = await requestJson('/auth/sesion')
+  return respuesta.usuario
+}
+
+export async function registrarClienteApi(datosCliente) {
+  return requestJson('/auth/registro', {
+    method: 'POST',
+    body: JSON.stringify(datosCliente),
+  })
+}
+
+export async function registrarAdministradorApi(datosAdministrador) {
+  return requestJson('/auth/admin/registro', {
+    method: 'POST',
+    body: JSON.stringify(datosAdministrador),
+  })
+}
+
+export async function iniciarSesionClienteApi(datosAcceso) {
+  return requestJson('/auth/sesion', {
+    method: 'POST',
+    body: JSON.stringify(datosAcceso),
+  })
+}
+
+export async function iniciarSesionAdministradorApi(datosAcceso) {
+  return requestJson('/auth/admin/sesion', {
+    method: 'POST',
+    body: JSON.stringify(datosAcceso),
+  })
+}
+
+export async function cerrarSesionApi() {
+  return requestJson('/auth/sesion', { method: 'DELETE' })
 }
 
 export async function crearProfesionalApi(datosProfesional) {

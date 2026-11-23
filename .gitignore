@@ -11,6 +11,8 @@ node_modules
 dist
 dist-ssr
 *.local
+/backend/.env
+backend/src/data/db.json.lock
 
 # Editor directories and files
 .vscode/*

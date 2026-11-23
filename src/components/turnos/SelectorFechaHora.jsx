@@ -3,10 +3,12 @@ import { useDisponibilidad } from '../../hooks/useDisponibilidad'
 import './SelectorFechaHora.css'
 
 export function SelectorFechaHora({ profesional, dia, hora, onChangeDia, onChangeHora }) {
-  const { diasDisponibles, horariosDisponibles } = useDisponibilidad(
-    profesional?.id,
-    dia
-  )
+  const {
+    diasDisponibles,
+    horariosDisponibles,
+    cargando,
+    errorDisponibilidad,
+  } = useDisponibilidad(profesional?.id, dia)
 
   const [diaInterno, setDiaInterno] = useState(dia || '')
 
@@ -52,7 +54,13 @@ export function SelectorFechaHora({ profesional, dia, hora, onChangeDia, onChang
 
       <div className="selectorFechaHoraCampo">
         <span className="selectorFechaHoraEtiqueta">Hora</span>
-        {horariosDisponibles.length === 0 ? (
+        {errorDisponibilidad ? (
+          <p className="selectorFechaHoraAviso" role="alert">
+            {errorDisponibilidad}
+          </p>
+        ) : cargando ? (
+          <p className="selectorFechaHoraAviso">Consultando horarios...</p>
+        ) : horariosDisponibles.length === 0 ? (
           <p className="selectorFechaHoraAviso">
             No hay horarios libres para este día. Elegí otro día.
           </p>

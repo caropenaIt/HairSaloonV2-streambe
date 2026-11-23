@@ -14,8 +14,24 @@ const datosVacios = {
   avatarUrl: '',
 }
 
+function crearDatosIniciales(profesional) {
+  if (!profesional) {
+    return datosVacios
+  }
+
+  return {
+    nombre: profesional.nombre,
+    apellido: profesional.apellido,
+    especialidad: profesional.especialidad,
+    diasDisponibles: [...profesional.diasDisponibles],
+    horariosDisponibles: [...profesional.horariosDisponibles],
+    descripcion: profesional.descripcion,
+    avatarUrl: profesional.avatarUrl || '',
+  }
+}
+
 export function ProfesionalForm({ profesionalInicial = null, onSubmit, onCancelar }) {
-  const [datos, setDatos] = useState(profesionalInicial ?? datosVacios)
+  const [datos, setDatos] = useState(() => crearDatosIniciales(profesionalInicial))
   const [horarioTemporal, setHorarioTemporal] = useState('')
   const [errores, setErrores] = useState({})
 

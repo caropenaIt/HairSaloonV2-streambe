@@ -43,6 +43,18 @@
   transition: background-color 0.2s ease, color 0.2s ease;
 }
 
+.navbar button.navbarEnlace {
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  font-size: inherit;
+}
+
+.navbarError {
+  flex-basis: 100%;
+  color: #fff;
+}
+
 .navbarEnlace:hover {
   background-color: rgba(255, 255, 255, 0.1);
   color: #fff;
