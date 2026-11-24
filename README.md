@@ -47,6 +47,7 @@ Los accesos son independientes y cada uno valida únicamente las cuentas de su r
 
 ## Pruebas y despliegue
 
+- `npm run build` genera la versión de producción del frontend en `dist/`.
 - `npm test` ejecuta las pruebas del proyecto desde la raíz.
 - Netlify aloja el frontend mediante la configuración de `netlify.toml`. Definí `VITE_API_BASE_URL` con la URL HTTPS del backend y el sufijo `/api`; la variable se incorpora durante la publicación.
 - El backend debe desplegarse como un servicio Node persistente con almacenamiento persistente para el JSON y una sola instancia. No se debe ejecutar como función efímera de Netlify: el archivo de datos y el bloqueo de instancia requieren disco persistente.
